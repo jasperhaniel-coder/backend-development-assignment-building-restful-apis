@@ -1,0 +1,5 @@
+$kind: collection
+description: Basic CRUD requests for the Products API. Run requests in order.
+variables:
+  baseUrl: http://localhost:8080
+  productId: ""

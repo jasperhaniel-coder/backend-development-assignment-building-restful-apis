@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/products/{{productId}}"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Blue Pencil",
+      "price": 1
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('updates the product', function () {
+          pm.response.to.have.status(200);
+          pm.expect(pm.response.json().name).to.eql('Blue Pencil');
+      });
+    language: text/javascript
+order: 4000

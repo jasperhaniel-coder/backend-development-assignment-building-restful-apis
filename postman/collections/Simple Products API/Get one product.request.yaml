@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/products/{{productId}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('returns the selected product', function () {
+          pm.response.to.have.status(200);
+          pm.expect(pm.response.json().name).to.eql('Pencil');
+      });
+    language: text/javascript
+order: 3000

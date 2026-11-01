@@ -1,0 +1,21 @@
+$kind: http-request
+url: "{{baseUrl}}/products"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Pencil",
+      "price": 0.75
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('creates a product and saves its ID', function () {
+          pm.response.to.have.status(201);
+          pm.collectionVariables.set('productId', pm.response.json().id);
+      });
+    language: text/javascript
+order: 2000

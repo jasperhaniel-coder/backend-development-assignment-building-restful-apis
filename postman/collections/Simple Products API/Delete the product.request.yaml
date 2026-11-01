@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/products/{{productId}}"
+method: DELETE
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test('deletes the product', function () {
+          pm.response.to.have.status(200);
+          pm.expect(pm.response.json().message).to.eql('Product deleted.');
+      });
+    language: text/javascript
+order: 5000
